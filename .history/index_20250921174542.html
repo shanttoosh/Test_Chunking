@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Chunking Optimizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">🚀</span>
+                <span class="logo-text">CSV Chunker Pro</span>
+            </div>
+            
+            <div class="process-steps">
+                <div class="step" id="step-upload">
+                    <div class="step-icon">📁</div>
+                    <div class="step-content">
+                        <div class="step-title">File Upload</div>
+                        <div class="step-desc">Load CSV data</div>
+                    </div>
+                </div>
+                
+                <div class="step" id="step-analysis">
+                    <div class="step-icon">🔍</div>
+                    <div class="step-content">
+                        <div class="step-title">Data Analysis</div>
+                        <div class="step-desc">Analyze structure</div>
+                    </div>
+                </div>
+                
+                <div class="step" id="step-preprocessing">
+                    <div class="step-icon">🔧</div>
+                    <div class="step-content">
+                        <div class="step-title">Preprocessing</div>
+                        <div class="step-desc">Clean & prepare</div>
+                    </div>
+                </div>
+                
+                <div class="step" id="step-chunking">
+                    <div class="step-icon">✂️</div>
+                    <div class="step-content">
+                        <div class="step-title">Chunking</div>
+                        <div class="step-desc">Split into chunks</div>
+                    </div>
+                </div>
+                
+                <div class="step" id="step-embedding">
+                    <div class="step-icon">🧠</div>
+                    <div class="step-content">
+                        <div class="step-title">Embedding</div>
+                        <div class="step-desc">Generate vectors</div>
+                    </div>
+                </div>
+                
+                <div class="step" id="step-storing">
+                    <div class="step-icon">💾</div>
+                    <div class="step-content">
+                        <div class="step-title">Storing</div>
+                        <div class="step-desc">Save to database</div>
+                    </div>
+                </div>
+                
+                <div class="step" id="step-retrieval">
+                    <div class="step-icon">🔍</div>
+                    <div class="step-content">
+                        <div class="step-title">Retrieval</div>
+                        <div class="step-desc">Test retrieval</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <div class="stats-title">Ready to start</div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-chunks">0</div>
+                        <div class="stat-label">TOTAL CHUNKS</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="process-time">0s</div>
+                        <div class="stat-label">PROCESS TIME</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="file-size">0.4MB</div>
+                        <div class="stat-label">FILE SIZE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="memory-usage">0MB</div>
+                        <div class="stat-label">MEMORY USAGE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Layer Selection -->
+            <div class="layer-selection" id="layer-selection">
+                <h1>CSV Chunking Optimizer</h1>
+                <p>Transform your CSV data into optimized chunks for better processing.</p>
+                
+                <div class="layer-cards">
+                    <div class="layer-card" onclick="selectLayer(1)">
+                        <div class="layer-icon">⚡</div>
+                        <div class="layer-title">Layer 1: Quick Mode</div>
+                        <div class="layer-desc">Fast processing with default settings</div>
+                    </div>
+                    
+                    <div class="layer-card" onclick="selectLayer(2)">
+                        <div class="layer-icon">⚙️</div>
+                        <div class="layer-title">Layer 2: Config Mode</div>
+                        <div class="layer-desc">Customize processing parameters</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- File Upload Section -->
+            <div class="file-upload-section" id="file-upload-section">
+                <div class="upload-area" onclick="document.getElementById('csvFile').click()">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Click to upload CSV file</div>
+                    <div class="upload-subtext">or drag and drop</div>
+                </div>
+                <input type="file" id="csvFile" accept=".csv" style="display: none;" onchange="handleFileUpload(event)">
+            </div>
+
+            <!-- Layer 1: Quick Mode -->
+            <div class="content-section" id="content-layer-1">
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="resetProcessing()">Reset</button>
+                    <button class="btn btn-secondary" onclick="saveConfig()">Save Config</button>
+                    <button class="btn btn-success" onclick="startProcessingLayer1()">Start Processing</button>
+                </div>
+                
+                <div class="processing-pipeline-section" id="processing-pipeline-section">
+                    <div class="simple-processing">
+                        <div class="processing-indicator" id="processing-indicator">
+                            <div class="spinner"></div>
+                            <span>Processing...</span>
+                        </div>
+                        
+                        <div class="query-section" id="query-section">
+                            <div class="query-header">
+                                <div class="query-icon">🔍</div>
+                                <h3>Search Your Data</h3>
+                            </div>
+                            <div class="query-input-container">
+                                <input type="text" class="query-input" id="query-input" placeholder="Enter your search query..." onkeypress="if(event.key==='Enter') performQuery()">
+                                <button class="query-btn" onclick="performQuery()">Search</button>
+                            </div>
+                            <div class="query-results" id="query-results"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 2: Config Mode -->
+            <div class="content-section" id="content-layer-2">
+                <div class="horizontal-flow">
+                    <!-- Preprocessing -->
+                    <div class="flow-layer">
+                        <div class="layer-header">
+                            <div class="layer-icon">🔧</div>
+                            <div class="layer-title">Preprocessing</div>
+                        </div>
+                        <div class="layer-content">
+                            <div class="form-group">
+                                <label class="form-label">Handle Null Values</label>
+                                <select class="form-control" id="null-handling">
+                                    <option value="leave">Leave as it is</option>
+                                    <option value="fill-mean">Fill with mean</option>
+                                    <option value="fill-median">Fill with median</option>
+                                    <option value="fill-mode">Fill with mode</option>
+                                    <option value="backward-fill">Backward fill</option>
+                                    <option value="forward-fill">Forward fill</option>
+                                    <option value="custom">Fill with custom value</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Handle Data Type</label>
+                                <select class="form-control" id="dtype-conversion">
+                                    <option value="datetime">Datetime</option>
+                                    <option value="numeric">Numeric</option>
+                                    <option value="object">Object</option>
+                                    <option value="bool">Bool</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chunking -->
+                    <div class="flow-layer">
+                        <div class="layer-header">
+                            <div class="layer-icon">✂️</div>
+                            <div class="layer-title">Chunking</div>
+                        </div>
+                        <div class="layer-content">
+                            <div class="form-group">
+                                <label class="form-label">Chunking Method</label>
+                                <select class="form-control" id="chunking-method">
+                                    <option value="fixed">Fixed</option>
+                                    <option value="recursive">Recursive</option>
+                                    <option value="semantic">Semantic</option>
+                                    <option value="document">Document</option>
+                                    <option value="agentic">Agentic</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chunk Size</label>
+                                <input type="number" class="form-control" id="chunk-size" value="512" min="100" max="2048">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chunk Overlap</label>
+                                <input type="number" class="form-control" id="chunk-overlap" value="50" min="0" max="200">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Embedding -->
+                    <div class="flow-layer">
+                        <div class="layer-header">
+                            <div class="layer-icon">🧠</div>
+                            <div class="layer-title">Embedding</div>
+                        </div>
+                        <div class="layer-content">
+                            <div class="form-group">
+                                <label class="form-label">Embedding Model</label>
+                                <select class="form-control" id="embedding-model">
+                                    <option value="all-mini">All Mini</option>
+                                    <option value="badge-small">Badge Small</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Dimensions</label>
+                                <input type="number" class="form-control" id="embedding-dims" value="384" min="128" max="1536">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Storage -->
+                    <div class="flow-layer">
+                        <div class="layer-header">
+                            <div class="layer-icon">💾</div>
+                            <div class="layer-title">Storage</div>
+                        </div>
+                        <div class="layer-content">
+                            <div class="form-group">
+                                <label class="form-label">Backend</label>
+                                <select class="form-control" id="storage-backend">
+                                    <option value="chroma">Chroma DB</option>
+                                    <option value="faiss">FAISS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Similarity Search</label>
+                                <select class="form-control" id="similarity-search">
+                                    <option value="cosine">Cosine</option>
+                                    <option value="euclidean">Euclidean</option>
+                                    <option value="dot">Dot</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="resetProcessing()">Reset</button>
+                    <button class="btn btn-secondary" onclick="saveConfig()">Save Config</button>
+                    <button class="btn btn-success" onclick="startProcessingLayer2()">Start Processing</button>
+                </div>
+                
+                <div class="processing-pipeline-section" id="processing-pipeline-section-layer2">
+                    <div class="simple-processing">
+                        <div class="processing-indicator" id="processing-indicator-layer2">
+                            <div class="spinner"></div>
+                            <span>Processing...</span>
+                        </div>
+                        
+                        <div class="query-section" id="query-section-layer2">
+                            <div class="query-header">
+                                <div class="query-icon">🔍</div>
+                                <h3>Search Your Data</h3>
+                            </div>
+                            <div class="query-input-container">
+                                <input type="text" class="query-input" id="query-input-layer2" placeholder="Enter your search query..." onkeypress="if(event.key==='Enter') performQueryLayer2()">
+                                <button class="query-btn" onclick="performQueryLayer2()">Search</button>
+                            </div>
+                            <div class="query-results" id="query-results-layer2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

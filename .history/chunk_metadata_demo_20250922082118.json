@@ -1,0 +1,138 @@
+[
+  {
+    "row_id": 0,
+    "source_file": "uploaded_csv",
+    "total_columns": 6,
+    "chunk_type": "csv_row",
+    "original_row_data": {
+      "product_id": 1,
+      "product_name": "Kitchen Knife Set",
+      "price": 29.99,
+      "category": "Kitchen",
+      "description": "Sharp stainless steel knife set with wooden handles. Perfect for professional cooking and home use. Includes 6 different knives for various cutting tasks.",
+      "in_stock": true
+    },
+    "chunk_index": 0,
+    "total_chunks": 1,
+    "chunk_size": 259,
+    "is_long_text_chunk": false,
+    "chunking_strategy": "row_based"
+  },
+  {
+    "row_id": 1,
+    "source_file": "uploaded_csv",
+    "total_columns": 6,
+    "chunk_type": "csv_row",
+    "original_row_data": {
+      "product_id": 2,
+      "product_name": "Gaming Mouse Pro",
+      "price": 79.99,
+      "category": "Electronics",
+      "description": "High-performance gaming mouse with RGB lighting and 12000 DPI sensor. Features programmable buttons and ergonomic design for extended gaming sessions.",
+      "in_stock": true
+    },
+    "chunk_index": 0,
+    "total_chunks": 1,
+    "chunk_size": 258,
+    "is_long_text_chunk": false,
+    "chunking_strategy": "row_based"
+  },
+  {
+    "row_id": 2,
+    "source_file": "uploaded_csv",
+    "total_columns": 6,
+    "chunk_type": "csv_row",
+    "original_row_data": {
+      "product_id": 3,
+      "product_name": "Blender Deluxe",
+      "price": 149.99,
+      "category": "Kitchen",
+      "description": "This is a very long product description that will be split into multiple chunks. The blender features a powerful 1000W motor that can handle ice, frozen fruits, and vegetables with ease. It comes with multiple speed settings and a large capacity pitcher. The stainless steel blades are designed to last and provide smooth blending results. Perfect for making smoothies, soups, and other blended beverages. The blender also includes a travel cup for on-the-go convenience. Easy to clean with dishwasher-safe components.",
+      "in_stock": false
+    },
+    "chunk_index": 0,
+    "total_chunks": 3,
+    "source_column": "description",
+    "chunk_size": 184,
+    "is_long_text_chunk": true,
+    "chunking_strategy": "semantic"
+  },
+  {
+    "row_id": 2,
+    "source_file": "uploaded_csv",
+    "total_columns": 6,
+    "chunk_type": "csv_row",
+    "original_row_data": {
+      "product_id": 3,
+      "product_name": "Blender Deluxe",
+      "price": 149.99,
+      "category": "Kitchen",
+      "description": "This is a very long product description that will be split into multiple chunks. The blender features a powerful 1000W motor that can handle ice, frozen fruits, and vegetables with ease. It comes with multiple speed settings and a large capacity pitcher. The stainless steel blades are designed to last and provide smooth blending results. Perfect for making smoothies, soups, and other blended beverages. The blender also includes a travel cup for on-the-go convenience. Easy to clean with dishwasher-safe components.",
+      "in_stock": false
+    },
+    "chunk_index": 1,
+    "total_chunks": 3,
+    "source_column": "description",
+    "chunk_size": 150,
+    "is_long_text_chunk": true,
+    "chunking_strategy": "semantic"
+  },
+  {
+    "row_id": 2,
+    "source_file": "uploaded_csv",
+    "total_columns": 6,
+    "chunk_type": "csv_row",
+    "original_row_data": {
+      "product_id": 3,
+      "product_name": "Blender Deluxe",
+      "price": 149.99,
+      "category": "Kitchen",
+      "description": "This is a very long product description that will be split into multiple chunks. The blender features a powerful 1000W motor that can handle ice, frozen fruits, and vegetables with ease. It comes with multiple speed settings and a large capacity pitcher. The stainless steel blades are designed to last and provide smooth blending results. Perfect for making smoothies, soups, and other blended beverages. The blender also includes a travel cup for on-the-go convenience. Easy to clean with dishwasher-safe components.",
+      "in_stock": false
+    },
+    "chunk_index": 2,
+    "total_chunks": 3,
+    "source_column": "description",
+    "chunk_size": 175,
+    "is_long_text_chunk": true,
+    "chunking_strategy": "semantic"
+  },
+  {
+    "row_id": 3,
+    "source_file": "uploaded_csv",
+    "total_columns": 6,
+    "chunk_type": "csv_row",
+    "original_row_data": {
+      "product_id": 4,
+      "product_name": "Smartphone Case",
+      "price": 19.99,
+      "category": "Electronics",
+      "description": "Protective case for smartphones with shock-absorbing technology.",
+      "in_stock": true
+    },
+    "chunk_index": 0,
+    "total_chunks": 1,
+    "chunk_size": 171,
+    "is_long_text_chunk": false,
+    "chunking_strategy": "row_based"
+  },
+  {
+    "row_id": 4,
+    "source_file": "uploaded_csv",
+    "total_columns": 6,
+    "chunk_type": "csv_row",
+    "original_row_data": {
+      "product_id": 5,
+      "product_name": "Coffee Maker",
+      "price": 89.99,
+      "category": "Kitchen",
+      "description": "Automatic coffee maker with programmable timer and thermal carafe.",
+      "in_stock": true
+    },
+    "chunk_index": 0,
+    "total_chunks": 1,
+    "chunk_size": 166,
+    "is_long_text_chunk": false,
+    "chunking_strategy": "row_based"
+  }
+]

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Chunking Optimizer Pro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">🚀</div>
+                <div class="logo-text">CSV Chunker Pro</div>
+            </div>
+
+            <div class="process-steps">
+                <div class="steps-title">Processing Pipeline</div>
+                
+                <div class="process-step" id="step-upload">
+                    <div class="step-content">
+                        <div class="step-icon">📄</div>
+                        <div class="step-details">
+                            <div class="step-title">File Upload</div>
+                            <div class="step-description">Load CSV data</div>
+                        </div>
+                        <div class="step-status">⏸️</div>
+                    </div>
+                    <div class="step-timing" id="timing-upload">Ready</div>
+                </div>
+
+                <div class="process-step" id="step-analyze">
+                    <div class="step-content">
+                        <div class="step-icon">🔍</div>
+                        <div class="step-details">
+                            <div class="step-title">Data Analysis</div>
+                            <div class="step-description">Analyze structure</div>
+                        </div>
+                        <div class="step-status">⏸️</div>
+                    </div>
+                </div>
+
+                <div class="process-step" id="step-preprocess">
+                    <div class="step-content">
+                        <div class="step-icon">🔧</div>
+                        <div class="step-details">
+                            <div class="step-title">Preprocessing</div>
+                            <div class="step-description">Clean & prepare</div>
+                        </div>
+                        <div class="step-status">⏸️</div>
+                    </div>
+                </div>
+
+                <div class="process-step" id="step-chunking">
+                    <div class="step-content">
+                        <div class="step-icon">✂️</div>
+                        <div class="step-details">
+                            <div class="step-title">Chunking</div>
+                            <div class="step-description">Split into chunks</div>
+                        </div>
+                        <div class="step-status">⏸️</div>
+                    </div>
+                </div>
+
+                <div class="process-step" id="step-embedding">
+                    <div class="step-content">
+                        <div class="step-icon">🧠</div>
+                        <div class="step-details">
+                            <div class="step-title">Embeddings</div>
+                            <div class="step-description">Generate vectors</div>
+                        </div>
+                        <div class="step-status">⏸️</div>
+                    </div>
+                </div>
+
+                <div class="process-step" id="step-storage">
+                    <div class="step-content">
+                        <div class="step-icon">💾</div>
+                        <div class="step-details">
+                            <div class="step-title">Vector Storage</div>
+                            <div class="step-description">Store in database</div>
+                        </div>
+                        <div class="step-status">⏸️</div>
+                    </div>
+                </div>
+
+                <div class="process-step" id="step-retrieval">
+                    <div class="step-content">
+                        <div class="step-icon">🔍</div>
+                        <div class="step-details">
+                            <div class="step-title">Retrieval Setup</div>
+                            <div class="step-description">Configure search</div>
+                        </div>
+                        <div class="step-status">⏸️</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="overall-progress"></div>
+                </div>
+                <div class="progress-text" id="progress-text">Ready to start</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-chunks">0</div>
+                    <div class="stat-label">Total Chunks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="processing-time">0s</div>
+                    <div class="stat-label">Process Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="file-size">0MB</div>
+                    <div class="stat-label">File Size</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="accuracy-score">0%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div>
+                    <h1 class="header-title">CSV Chunking Optimizer</h1>
+                    <p style="color: var(--text-secondary); margin-top: 5px;">Transform your CSV data into optimized chunks for better processing</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" onclick="exportConfig()">
+                        💾 Export Config
+                    </button>
+                    <button class="btn btn-secondary" onclick="importConfig()">
+                        📥 Import Config
+                    </button>
+                </div>
+            </div>
+
+            <!-- Layer Selection -->
+            <div class="layer-selection">
+                <div class="layer-card active" onclick="selectLayer(1)" id="layer-card-1">
+                    <div class="layer-header">
+                        <div class="layer-icon">⚡</div>
+                        <div class="layer-title">Fast Mode</div>
+                    </div>
+                    <div class="layer-description">
+                        Auto-optimized processing with best-practice defaults. Perfect for quick results without manual configuration.
+                    </div>
+                    <ul class="layer-features">
+                        <li>Automatic parameter optimization</li>
+                        <li>One-click processing</li>
+                        <li>Fastest execution time</li>
+                    </ul>
+                </div>
+
+                <div class="layer-card" onclick="selectLayer(2)" id="layer-card-2">
+                    <div class="layer-header">
+                        <div class="layer-icon">⚙️</div>
+                        <div class="layer-title">Config Mode</div>
+                    </div>
+                    <div class="layer-description">
+                        High-level configuration options for customized processing. Balance between ease-of-use and control.
+                    </div>
+                    <ul class="layer-features">
+                        <li>Preprocessing options</li>
+                        <li>Model selection</li>
+                        <li>Storage configuration</li>
+                    </ul>
+                </div>
+
+                <div class="layer-card" onclick="selectLayer(3)" id="layer-card-3">
+                    <div class="layer-header">
+                        <div class="layer-icon">🔬</div>
+                        <div class="layer-title">Deep Config</div>
+                    </div>
+                    <div class="layer-description">
+                        Advanced parameter tuning for maximum control and optimization. Perfect for expert users and specific use cases.
+                    </div>
+                    <ul class="layer-features">
+                        <li>Full parameter control</li>
+                        <li>Advanced algorithms</li>
+                        <li>Custom optimization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- File Upload Section -->
+            <div class="file-upload-section">
+                <div class="file-upload" onclick="document.getElementById('csvFile').click()" id="file-upload-area">
+                    <div class="upload-icon">📤</div>
+                    <h3 class="upload-title">Upload Your CSV File</h3>
+                    <p class="upload-subtitle">Drop your file here or click to browse</p>
+                    <div class="upload-info">
+                        <span>📊 Supported: CSV files</span>
+                        <span>💾 Max size: 500MB</span>
+                        <span>🔒 Secure processing</span>
+                    </div>
+                    <input type="file" id="csvFile" accept=".csv" style="display: none;" onchange="handleFileUpload(event)">
+                </div>
+
+                <div class="file-info" id="file-info">
+                    <div class="file-details" id="file-details"></div>
+                </div>
+            </div>
+
+            <!-- Layer 1: Fast Mode -->
+            <div class="content-section active" id="content-layer-1">
+                <div class="config-grid">
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <div class="config-icon">🤖</div>
+                            <div class="config-title">Auto-Optimized Settings</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; font-size: 14px;">
+                            <div>
+                                <p><strong>🔧 Preprocessing:</strong> Auto null handling</p>
+                                <p><strong>✂️ Chunking:</strong> Semantic (512 tokens)</p>
+                                <p><strong>🧠 Embeddings:</strong> OpenAI text-3-large</p>
+                            </div>
+                            <div>
+                                <p><strong>💾 Storage:</strong> FAISS optimized</p>
+                                <p><strong>🔍 Retrieval:</strong> Cosine similarity</p>
+                                <p><strong>⚡ Mode:</strong> Speed + Accuracy</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <div class="config-icon">📈</div>
+                            <div class="config-title">Expected Performance</div>
+                        </div>
+                        <div class="results-grid" style="margin-bottom: 0;">
+                            <div class="result-metric">
+                                <div class="metric-value">~85%</div>
+                                <div class="metric-label">Accuracy</div>
+                            </div>
+                            <div class="result-metric">
+                                <div class="metric-value">~30s</div>
+                                <div class="metric-label">Process Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 2: Config Mode -->
+            <div class="content-section" id="content-layer-2">
+                <div class="config-grid">
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <div class="config-icon">🔧</div>
+                            <div class="config-title">Preprocessing Options</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Null Value Handling</label>
+                            <select class="form-control" id="null-handling">
+                                <option value="auto">Auto-detect & Handle</option>
+                                <option value="remove">Remove null rows</option>
+                                <option value="fill-mean">Fill with mean</option>
+                                <option value="fill-mode">Fill with mode</option>
+                                <option value="forward-fill">Forward fill</option>
+                                <option value="custom">Custom value</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Data Type Conversion</label>
+                            <select class="form-control" id="dtype-conversion">
+                                <option value="auto">Auto-infer types</option>
+                                <option value="string">Keep as strings</option>
+                                <option value="manual">Manual mapping</option>
+                            </select>
+                        </div>
+                        <div class="checkbox-grid">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="remove-duplicates" checked>
+                                <label for="remove-duplicates">Remove Duplicates</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="normalize-text" checked>
+                                <label for="normalize-text">Normalize Text</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <div class="config-icon">✂️</div>
+                            <div class="config-title">Chunking Strategy</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Chunking Method</label>
+                            <select class="form-control" id="chunking-method">
+                                <option value="semantic">Semantic Chunking</option>
+                                <option value="fixed">Fixed Size</option>
+                                <option value="recursive">Recursive Text Splitter</option>
+                                <option value="document">Document-based</option>
+                                <option value="agentic">Agentic Chunking</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Chunk Size</label>
+                            <select class="form-control" id="chunk-size">
+                                <option value="auto">Auto-optimize</option>
+                                <option value="128">Small (128 tokens)</option>
+                                <option value="512">Medium (512 tokens)</option>
+                                <option value="1024">Large (1024 tokens)</option>
+                                <option value="2048">X-Large (2048 tokens)</option>
+                            </select>
+                        </div>
+                        <div class="range-group">
+                            <label class="form-label">Overlap Percentage</label>
+                            <input type="range" class="range-slider" id="overlap-range" min="0" max="50" value="10" oninput="updateRangeValue('overlap-range', 'overlap-value')">
+                            <div class="range-labels">
+                                <span>0%</span>
+                                <span class="range-value" id="overlap-value">10%</span>
+                                <span>50%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <div class="config-icon">🧠</div>
+                            <div class="config-title">Embedding Model</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Model Selection</label>
+                            <select class="form-control" id="embedding-model">
+                                <option value="openai-large">OpenAI text-embedding-3-large</option>
+                                <option value="openai-small">OpenAI text-embedding-3-small</option>
+                                <option value="sentence-bert">Sentence-BERT</option>
+                                <option value="cohere">Cohere Embed v3</option>
+                                <option value="huggingface">HuggingFace Models</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Embedding Dimensions</label>
+                            <select class="form-control" id="embedding-dims">
+                                <option value="1536">1536 (Recommended)</option>
+                                <option value="1024">1024 (Balanced)</option>
+                                <option value="512">512 (Fast)</option>
+                                <option value="256">256 (Fastest)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <div class="config-icon">💾</div>
+                            <div class="config-title">Vector Storage</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Storage Backend</label>
+                            <select class="form-control" id="storage-backend">
+                                <option value="faiss">FAISS (Recommended)</option>
+                                <option value="chroma">Chroma DB</option>
+                                <option value="pinecone">Pinecone</option>
+                                <option value="weaviate">Weaviate</option>
+                                <option value="qdrant">Qdrant</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Index Type</label>
+                            <select class="form-control" id="index-type">
+                                <option value="flat">Exact Search (Flat)</option>
+                                <option value="ivf">Approximate (IVF)</option>
+                                <option value="hnsw">Graph-based (HNSW)</option>
+                            </select>
+                        </div>
+                        <div class="toggle-group">
+                            <label class="form-label">Enable Compression</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="enable-compression">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 3: Deep Config -->
+            <div class="content-section" id="content-layer-3">
+                <div class="deep-config-container">
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <div class="config-icon">🔧</div>
+                                <div class="config-title">Advanced Preprocessing</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Null Handling Strategy</label>
+                                <select class="form-control" id="advanced-null-handling">
+                                    <option value="drop-any">Drop rows with any null</option>
+                                    <option value="drop-all">Drop rows with all nulls</option>
+                                    <option value="interpolate">Interpolate values</option>
+                                    <option value="knn-impute">KNN Imputation</option>
+                                    <option value="custom-fill">Custom fill value</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Custom Fill Value</label>
+                                <input type="text" class="form-control" id="custom-fill-value" placeholder="Enter custom value">
+                            </div>
+                            <div class="checkbox-grid">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="remove-stopwords" checked>
+                                    <label for="remove-stopwords">Remove Stopwords</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="lowercase-text" checked>
+                                    <label for="lowercase-text">Lowercase Text</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="remove-punctuation">
+                                    <label for="remove-punctuation">Remove Punctuation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="stemming">
+                                    <label for="stemming">Apply Stemming</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="lemmatization">
+                                    <label for="lemmatization">Apply Lemmatization</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="remove-numbers">
+                                    <label for="remove-numbers">Remove Numbers</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <div class="config-icon">📊</div>
+                                <div class="config-title">Data Normalization</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Normalization Method</label>
+                                <select class="form-control" id="normalization-method">
+                                    <option value="none">No Normalization</option>
+                                    <option value="minmax">Min-Max Scaling</option>
+                                    <option value="zscore">Z-Score Normalization</option>
+                                    <option value="robust">Robust Scaling</option>
+                                    <option value="quantile">Quantile Transformation</option>
+                                </select>
+                            </div>
+                            <div class="range-group">
+                                <label class="form-label">Feature Scaling Range</label>
+                                <input type="range" class="range-slider" id="scale-min" min="0" max="1" value="0" step="0.1" oninput="updateRangeValue('scale-min', 'scale-min-value')">
+                                <div class="range-labels">
+                                    <span>Min: <span class="range-value" id="scale-min-value">0</span></span>
+                                </div>
+                                <input type="range" class="range-slider" id="scale-max" min="1" max="10" value="1" step="0.1" oninput="updateRangeValue('scale-max', 'scale-max-value')">
+                                <div class="range-labels">
+                                    <span>Max: <span class="range-value" id="scale-max-value">1</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <div class="config-icon">✂️</div>
+                                <div class="config-title">Advanced Chunking</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chunking Algorithm</label>
+                                <select class="form-control" id="advanced-chunking-method">
+                                    <option value="semantic">Semantic Chunking</option>
+                                    <option value="fixed-size">Fixed Size</option>
+                                    <option value="recursive">Recursive Text Splitter</option>
+                                    <option value="document-aware">Document-aware Chunking</option>
+                                    <option value="agentic">Agentic Chunking</option>
+                                    <option value="sliding-window">Sliding Window</option>
+                                    <option value="sentence-boundary">Sentence Boundary</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chunk Size (tokens)</label>
+                                <input type="number" class="form-control" id="advanced-chunk-size" value="512" min="64" max="4096">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Chunk Overlap (tokens)</label>
+                                <input type="number" class="form-control" id="advanced-chunk-overlap" value="50" min="0" max="500">
+                            </div>
+                            <div class="range-group">
+                                <label class="form-label">Semantic Similarity Threshold</label>
+                                <input type="range" class="range-slider" id="semantic-threshold" min="0.1" max="1.0" value="0.75" step="0.05" oninput="updateRangeValue('semantic-threshold', 'semantic-threshold-value')">
+                                <div class="range-labels">
+                                    <span>0.1</span>
+                                    <span class="range-value" id="semantic-threshold-value">0.75</span>
+                                    <span>1.0</span>
+                                </div>
+                            </div>
+                            <div class="toggle-group">
+                                <label class="form-label">Preserve Sentence Boundaries</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="preserve-sentences" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <div class="config-icon">🧠</div>
+                                <div class="config-title">Advanced Embeddings</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Embedding Model</label>
+                                <select class="form-control" id="advanced-embedding-model">
+                                    <option value="text-embedding-3-large">OpenAI text-embedding-3-large</option>
+                                    <option value="text-embedding-3-small">OpenAI text-embedding-3-small</option>
+                                    <option value="text-embedding-ada-002">OpenAI text-embedding-ada-002</option>
+                                    <option value="all-MiniLM-L6-v2">sentence-transformers/all-MiniLM-L6-v2</option>
+                                    <option value="all-mpnet-base-v2">sentence-transformers/all-mpnet-base-v2</option>
+                                    <option value="cohere-embed-english-v3">Cohere Embed English v3</option>
+                                    <option value="cohere-embed-multilingual-v3">Cohere Embed Multilingual v3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Embedding Dimensions</label>
+                                <input type="number" class="form-control" id="advanced-embedding-dims" value="1536" min="128" max="3072">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Batch Size</label>
+                                <input type="number" class="form-control" id="embedding-batch-size" value="100" min="1" max="1000">
+                            </div>
+                            <div class="range-group">
+                                <label class="form-label">Temperature (for generative embeddings)</label>
+                                <input type="range" class="range-slider" id="embedding-temperature" min="0" max="2" value="1" step="0.1" oninput="updateRangeValue('embedding-temperature', 'temperature-value')">
+                                <div class="range-labels">
+                                    <span>0</span>
+                                    <span class="range-value" id="temperature-value">1</span>
+                                    <span>2</span>
+                                </div>
+                            </div>
+                            <div class="toggle-group">
+                                <label class="form-label">Normalize Embeddings</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="normalize-embeddings" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <div class="config-icon">💾</div>
+                                <div class="config-title">Storage Configuration</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Vector Database</label>
+                                <select class="form-control" id="advanced-storage-backend">
+                                    <option value="faiss">FAISS</option>
+                                    <option value="chroma">ChromaDB</option>
+                                    <option value="pinecone">Pinecone</option>
+                                    <option value="weaviate">Weaviate</option>
+                                    <option value="qdrant">Qdrant</option>
+                                    <option value="milvus">Milvus</option>
+                                    <option value="redis">Redis Stack</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Index Algorithm</label>
+                                <select class="form-control" id="advanced-index-type">
+                                    <option value="IndexFlatIP">IndexFlatIP (Exact, Inner Product)</option>
+                                    <option value="IndexFlatL2">IndexFlatL2 (Exact, L2 Distance)</option>
+                                    <option value="IndexIVFFlat">IndexIVFFlat (Approximate)</option>
+                                    <option value="IndexIVFPQ">IndexIVFPQ (Compressed)</option>
+                                    <option value="IndexHNSW">IndexHNSW (Graph-based)</option>
+                                    <option value="IndexLSH">IndexLSH (Locality-Sensitive Hashing)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Number of Clusters (for IVF)</label>
+                                <input type="number" class="form-control" id="num-clusters" value="100" min="10" max="10000">
+                            </div>
+                            <div class="toggle-group">
+                                <label class="form-label">Enable GPU Acceleration</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="gpu-acceleration">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <div class="config-icon">🔍</div>
+                                <div class="config-title">Retrieval Configuration</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Similarity Metric</label>
+                                <select class="form-control" id="similarity-metric">
+                                    <option value="cosine">Cosine Similarity</option>
+                                    <option value="dot_product">Dot Product</option>
+                                    <option value="euclidean">Euclidean Distance</option>
+                                    <option value="manhattan">Manhattan Distance</option>
+                                    <option value="jaccard">Jaccard Similarity</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Top-K Results</label>
+                                <input type="number" class="form-control" id="top-k-results" value="10" min="1" max="1000">
+                            </div>
+                            <div class="range-group">
+                                <label class="form-label">Score Threshold</label>
+                                <input type="range" class="range-slider" id="score-threshold" min="0" max="1" value="0.7" step="0.05" oninput="updateRangeValue('score-threshold', 'score-threshold-value')">
+                                <div class="range-labels">
+                                    <span>0</span>
+                                    <span class="range-value" id="score-threshold-value">0.7</span>
+                                    <span>1</span>
+                                </div>
+                            </div>
+                            <div class="toggle-group">
+                                <label class="form-label">Enable Reranking</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="enable-reranking">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Reranking Model</label>
+                                <select class="form-control" id="reranking-model">
+                                    <option value="none">None</option>
+                                    <option value="cross-encoder">Cross-Encoder</option>
+                                    <option value="cohere-rerank">Cohere Rerank</option>
+                                    <option value="sentence-bert-rerank">SentenceBERT Rerank</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <div class="config-icon">⚡</div>
+                                <div class="config-title">Performance Tuning</div>
+                            </div>
+                            <div class="toggle-group">
+                                <label class="form-label">Parallel Processing</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="parallel-processing" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Number of Workers</label>
+                                <input type="number" class="form-control" id="num-workers" value="4" min="1" max="32">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Memory Limit (GB)</label>
+                                <input type="number" class="form-control" id="memory-limit" value="8" min="1" max="64">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Optimization Priority</label>
+                                <select class="form-control" id="optimization-priority">
+                                    <option value="balanced">Balanced</option>
+                                    <option value="speed">Speed Priority</option>
+                                    <option value="memory">Memory Priority</option>
+                                    <option value="accuracy">Accuracy Priority</option>
+                                </select>
+                            </div>
+                            <div class="toggle-group">
+                                <label class="form-label">Enable Caching</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="enable-caching" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="range-group">
+                                <label class="form-label">Cache Size (MB)</label>
+                                <input type="range" class="range-slider" id="cache-size" min="100" max="10000" value="1000" step="100" oninput="updateRangeValue('cache-size', 'cache-size-value')">
+                                <div class="range-labels">
+                                    <span>100MB</span>
+                                    <span class="range-value" id="cache-size-value">1000MB</span>
+                                    <span>10GB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel" id="results-panel">
+                <div class="results-header">
+                    <div class="config-icon">📊</div>
+                    <div class="results-title">Processing Results</div>
+                    <div style="margin-left: auto;">
+                        <button class="btn btn-secondary" onclick="exportResults()">📥 Export</button>
+                        <button class="btn btn-primary" onclick="startRetrieval()">🔍 Test Retrieval</button>
+                    </div>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-metric">
+                        <div class="metric-value" id="result-chunks">0</div>
+                        <div class="metric-label">Chunks Created</div>
+                        <div class="metric-change positive" id="chunks-change">+0%</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="metric-value" id="result-embeddings">0</div>
+                        <div class="metric-label">Embeddings Generated</div>
+                        <div class="metric-change positive" id="embeddings-change">+0%</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="metric-value" id="result-time">0s</div>
+                        <div class="metric-label">Processing Time</div>
+                        <div class="metric-change negative" id="time-change">0s</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="metric-value" id="result-accuracy">0%</div>
+                        <div class="metric-label">Retrieval Accuracy</div>
+                        <div class="metric-change positive" id="accuracy-change">+0%</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="metric-value" id="result-memory">0MB</div>
+                        <div class="metric-label">Memory Usage</div>
+                        <div class="metric-change" id="memory-change">0MB</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="metric-value" id="result-throughput">0/s</div>
+                        <div class="metric-label">Throughput</div>
+                        <div class="metric-change positive" id="throughput-change">+0%</div>
+                    </div>
+                </div>
+
+                <!-- Detailed Results -->
+                <div style="margin-top: 30px;">
+                    <h4 style="margin-bottom: 20px; color: var(--text-primary);">📈 Performance Analysis</h4>
+                    <div class="config-grid">
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <div class="config-icon">🎯</div>
+                                <div class="config-title">Quality Metrics</div>
+                            </div>
+                            <div class="results-grid" style="margin-bottom: 0;">
+                                <div class="result-metric">
+                                    <div class="metric-value" id="semantic-coherence">0%</div>
+                                    <div class="metric-label">Semantic Coherence</div>
+                                </div>
+                                <div class="result-metric">
+                                    <div class="metric-value" id="chunk-diversity">0%</div>
+                                    <div class="metric-label">Chunk Diversity</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <div class="config-icon">⚡</div>
+                                <div class="config-title">Performance Metrics</div>
+                            </div>
+                            <div class="results-grid" style="margin-bottom: 0;">
+                                <div class="result-metric">
+                                    <div class="metric-value" id="cpu-usage">0%</div>
+                                    <div class="metric-label">CPU Usage</div>
+                                </div>
+                                <div class="result-metric">
+                                    <div class="metric-value" id="gpu-usage">0%</div>
+                                    <div class="metric-label">GPU Usage</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sample Output -->
+                <div style="margin-top: 30px;">
+                    <h4 style="margin-bottom: 20px; color: var(--text-primary);">🔍 Sample Output</h4>
+                    <div class="config-card">
+                        <div id="sample-output" style="background: var(--bg-light); padding: 20px; border-radius: 12px; font-family: monospace; font-size: 14px; line-height: 1.6; color: var(--text-secondary); max-height: 300px; overflow-y: auto;">
+                            <div style="color: var(--text-primary); font-weight: bold; margin-bottom: 10px;">Sample Chunks Generated:</div>
+                            <div id="sample-chunks">Processing will display sample chunks here...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Section -->
+            <div class="action-section">
+                <div class="processing-indicator" id="processing-indicator">
+                    <div class="spinner"></div>
+                    <span id="processing-text">Processing...</span>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="resetConfiguration()" id="reset-btn">
+                        🔄 Reset
+                    </button>
+                    <button class="btn btn-secondary" onclick="saveConfiguration()" id="save-btn">
+                        💾 Save Config
+                    </button>
+                    <button class="btn btn-success" onclick="startProcessing()" id="process-btn">
+                        🚀 Start Processing
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
