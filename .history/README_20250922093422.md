@@ -1,0 +1,203 @@
+# CSV Document Chunking Syst
+
+A comprehensive system for processing CSV documents with semantic search capabilities, featuring a React frontend and a three-layer Python backend architecture.
+
+## 🚀 Features
+
+- **React Frontend**: Modern, responsive UI for CSV upload and search
+- **Three-Layer Backend**: Fast Mode, Config Mode, and Deep Config processing
+- **Semantic Search**: AI-powered search using sentence transformers
+- **Vector Database**: ChromaDB for efficient similarity search
+- **Multiple Chunking Strategies**: Fixed, recursive, and document-based chunking
+- **Advanced Preprocessing**: Data cleaning, type conversion, and ML-based imputation
+
+## 🏗️ Architecture
+
+### Frontend (React)
+- **Port**: 3000
+- **Features**: File upload, layer selection, search interface
+- **Technology**: React, JavaScript, CSS
+
+### Backend (Python FastAPI)
+- **Layer 1 - Fast Mode**: Port 8001 (Quick processing with defaults)
+- **Layer 2 - Config Mode**: Port 8002 (Configurable processing)
+- **Layer 3 - Deep Config**: Port 8003 (Advanced processing with ML)
+
+## 📁 Project Structure
+
+```
+test-chunking/
+├── src/                    # React frontend
+│   ├── App.js
+│   ├── App.css
+│   └── index.js
+├── public/                 # Static files
+│   └── index.html
+├── backend/                # Python backend
+│   ├── layer1_fast_mode/   # Fast processing
+│   ├── layer2_config_mode/ # Configurable processing
+│   ├── layer3_deep_config/ # Advanced processing
+│   ├── requirements.txt    # Python dependencies
+│   └── README.md          # Backend documentation
+├── package.json           # Node.js dependencies
+└── README.md             # This file
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 14+
+- Python 3.8+
+- Git
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/YOUR_USERNAME/test-chunking.git
+cd test-chunking
+```
+
+### 2. Install Frontend Dependencies
+```bash
+npm install
+```
+
+### 3. Install Backend Dependencies
+```bash
+cd backend
+pip install -r requirements.txt
+```
+
+### 4. Start the Application
+
+#### Option 1: PowerShell (Windows)
+```powershell
+# Terminal 1 - Frontend
+npm start
+
+# Terminal 2 - Backend Layer 1
+cd backend\layer1_fast_mode
+python main.py
+
+# Terminal 3 - Backend Layer 2
+cd backend\layer2_config_mode
+python main.py
+
+# Terminal 4 - Backend Layer 3
+cd backend\layer3_deep_config
+python main.py
+```
+
+#### Option 2: Bash (Linux/Mac)
+```bash
+# Terminal 1 - Frontend
+npm start
+
+# Terminal 2 - Backend Layer 1
+cd backend/layer1_fast_mode && python main.py &
+
+# Terminal 3 - Backend Layer 2
+cd backend/layer2_config_mode && python main.py &
+
+# Terminal 4 - Backend Layer 3
+cd backend/layer3_deep_config && python main.py &
+```
+
+### 5. Access the Application
+- **Frontend**: http://localhost:3000
+- **Backend APIs**: 
+  - Layer 1: http://localhost:8001/docs
+  - Layer 2: http://localhost:8002/docs
+  - Layer 3: http://localhost:8003/docs
+
+## 🔧 Usage
+
+### 1. Upload CSV File
+- Open http://localhost:3000
+- Click "Choose File" and select a CSV file
+- The file will be uploaded to the backend
+
+### 2. Select Processing Layer
+- **Fast Mode**: Quick processing with default settings
+- **Config Mode**: Customizable processing parameters
+- **Deep Config**: Advanced processing with ML features
+
+### 3. Process the Data
+- Click "Process" to run the complete pipeline:
+  - Preprocessing
+  - Chunking
+  - Embedding generation
+  - Vector storage
+
+### 4. Search
+- Enter your search query
+- Get semantic search results with relevance scores
+
+## 📊 API Endpoints
+
+### Layer 1 (Fast Mode) - Port 8001
+- `POST /upload` - Upload CSV file
+- `POST /process` - Process uploaded file
+- `POST /search` - Semantic search
+- `GET /collections` - List collections
+- `GET /health` - Health check
+
+### Layer 2 (Config Mode) - Port 8002
+- All Layer 1 endpoints plus:
+- `POST /process-config` - Process with custom configuration
+- `GET /config-options` - Get available configuration options
+
+### Layer 3 (Deep Config) - Port 8003
+- All Layer 2 endpoints plus:
+- `POST /process-advanced` - Advanced processing with ML
+- `GET /advanced-options` - Get advanced configuration options
+
+## 🧪 Testing
+
+### Health Checks
+```bash
+curl http://localhost:8001/health
+curl http://localhost:8002/health
+curl http://localhost:8003/health
+```
+
+### Test Upload
+```bash
+curl -X POST "http://localhost:8001/upload" \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@sample.csv"
+```
+
+## 📚 Documentation
+
+- [Backend Documentation](backend/README.md)
+- [Layer Comparison](backend/LAYER_COMPARISON.md)
+- [PowerShell Commands](backend/POWERSHELL_COMMANDS.txt)
+- [GitHub Setup Guide](GITHUB_SETUP.md)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+If you encounter any issues:
+1. Check the [troubleshooting guide](backend/README.md#troubleshooting)
+2. Review the [PowerShell commands](backend/POWERSHELL_COMMANDS.txt)
+3. Open an issue on GitHub
+
+## 🔮 Future Enhancements
+
+- [ ] Docker containerization
+- [ ] Kubernetes deployment
+- [ ] Real-time processing
+- [ ] Advanced analytics dashboard
+- [ ] Multi-language support
+- [ ] Cloud deployment guides
